@@ -78,34 +78,46 @@ local Library = {
 
     IsLightTheme = false,
     Scheme = {
-        -- Enhanced Dark Theme Colors
-        BackgroundColor = Color3.fromRGB(12, 12, 16),
-        MainColor = Color3.fromRGB(22, 22, 28),
-        SecondaryColor = Color3.fromRGB(28, 28, 36),
-        AccentColor = Color3.fromRGB(138, 93, 255),
-        AccentHover = Color3.fromRGB(148, 103, 255),
-        OutlineColor = Color3.fromRGB(45, 45, 55),
-        BorderColor = Color3.fromRGB(35, 35, 42),
-        FontColor = Color3.fromRGB(245, 245, 245),
-        SecondaryFontColor = Color3.fromRGB(180, 180, 185),
+        -- 🌟 Premium Modern Dark Theme Colors
+        BackgroundColor = Color3.fromRGB(8, 8, 12),           -- Deeper background
+        MainColor = Color3.fromRGB(18, 18, 24),              -- Enhanced main color
+        SecondaryColor = Color3.fromRGB(24, 24, 32),         -- Refined secondary
+        AccentColor = Color3.fromRGB(120, 80, 255),          -- Premium purple accent
+        AccentHover = Color3.fromRGB(135, 95, 255),          -- Brighter hover
+        OutlineColor = Color3.fromRGB(50, 50, 65),           -- Better contrast outline
+        BorderColor = Color3.fromRGB(32, 32, 45),            -- Enhanced border
+        FontColor = Color3.fromRGB(250, 250, 255),           -- Crisp white text
+        SecondaryFontColor = Color3.fromRGB(190, 190, 200),  -- Better secondary text
         Font = Font.fromEnum(Enum.Font.GothamMedium),
 
-        -- Status Colors
-        Red = Color3.fromRGB(255, 75, 85),
-        Green = Color3.fromRGB(85, 255, 130),
-        Yellow = Color3.fromRGB(255, 205, 85),
-        Blue = Color3.fromRGB(85, 155, 255),
-        Orange = Color3.fromRGB(255, 155, 85),
-        Purple = Color3.fromRGB(185, 85, 255),
+        -- 🎨 Enhanced Status Colors
+        Red = Color3.fromRGB(255, 85, 95),                   -- Vibrant error red
+        Green = Color3.fromRGB(95, 255, 140),                -- Fresh success green
+        Yellow = Color3.fromRGB(255, 215, 95),               -- Warm warning yellow
+        Blue = Color3.fromRGB(95, 165, 255),                 -- Cool info blue
+        Orange = Color3.fromRGB(255, 165, 95),               -- Energetic orange
+        Purple = Color3.fromRGB(195, 95, 255),               -- Rich purple
         
-        -- Utility Colors
-        Dark = Color3.fromRGB(8, 8, 12),
-        White = Color3.fromRGB(255, 255, 255),
-        Gray = Color3.fromRGB(120, 120, 125),
+        -- 🔧 Enhanced Utility Colors
+        Dark = Color3.fromRGB(4, 4, 8),                      -- Ultra dark
+        White = Color3.fromRGB(255, 255, 255),               -- Pure white
+        Gray = Color3.fromRGB(130, 130, 140),                -- Refined gray
         
-        -- Gradient Colors for modern effects
-        GradientStart = Color3.fromRGB(138, 93, 255),
-        GradientEnd = Color3.fromRGB(185, 85, 255),
+        -- ✨ Premium Gradient Effects
+        GradientStart = Color3.fromRGB(120, 80, 255),        -- Primary gradient
+        GradientEnd = Color3.fromRGB(195, 95, 255),          -- Secondary gradient
+        GlowColor = Color3.fromRGB(120, 80, 255),            -- Glow effect color
+        
+        -- 🎯 Interactive State Colors
+        HoverColor = Color3.fromRGB(30, 30, 40),             -- Hover background
+        ActiveColor = Color3.fromRGB(35, 35, 48),            -- Active state
+        DisabledColor = Color3.fromRGB(15, 15, 20),          -- Disabled state
+        
+        -- 🌈 Modern Color Palette Extensions
+        Cyan = Color3.fromRGB(95, 255, 235),                 -- Modern cyan
+        Pink = Color3.fromRGB(255, 95, 185),                 -- Vibrant pink
+        Lime = Color3.fromRGB(155, 255, 95),                 -- Fresh lime
+        Amber = Color3.fromRGB(255, 185, 95),                -- Warm amber
     },
 
     Registry = {},
@@ -189,7 +201,7 @@ do
         end
 
         local URLPath = AssetPath:gsub("Obsidian/", "")
-        writefile(AssetPath, game:HttpGet(`{BaseURL}{URLPath}`))
+        writefile(AssetPath, game:HttpGet(BaseURL .. URLPath))
     end
 
     for _, Data in ObsidianImageManager.Assets do
@@ -2826,25 +2838,57 @@ do
             })
 
             local Corner = New("UICorner", {
-                CornerRadius = UDim.new(0, 6),
+                CornerRadius = UDim.new(0, 8), -- Increased corner radius for modern look
                 Parent = Base,
             })
 
             local Stroke = New("UIStroke", {
                 Color = "OutlineColor",
                 Transparency = Button.Disabled and 0.5 or 0,
-                Thickness = 1.5,
+                Thickness = 2, -- Slightly thicker stroke for better definition
                 Parent = Base,
             })
 
-            -- Add modern gradient effect for accent buttons
+            -- Add premium glow effect for non-disabled buttons
+            if not Button.Disabled then
+                local Glow = New("Frame", {
+                    AnchorPoint = Vector2.new(0.5, 0.5),
+                    BackgroundColor3 = Button.Risky and "Red" or "AccentColor",
+                    BackgroundTransparency = 0.9,
+                    Position = UDim2.fromScale(0.5, 0.5),
+                    Size = UDim2.fromOffset(Base.AbsoluteSize.X + 8, Base.AbsoluteSize.Y + 8),
+                    Visible = false,
+                    ZIndex = 0,
+                    Parent = Base.Parent,
+                })
+                New("UICorner", {
+                    CornerRadius = UDim.new(0, 10),
+                    Parent = Glow,
+                })
+                
+                -- Store glow reference for hover effects
+                Base:SetAttribute("GlowFrame", Glow)
+            end
+
+            -- Add enhanced gradient effect for risky buttons
             if Button.Risky then
                 local Gradient = New("UIGradient", {
                     Color = ColorSequence.new{
                         ColorSequenceKeypoint.new(0, Library.Scheme.Red),
-                        ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 100, 110))
+                        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 100, 110)),
+                        ColorSequenceKeypoint.new(1, Library.Scheme.Red)
                     },
-                    Rotation = 45,
+                    Rotation = 135, -- Diagonal gradient for premium look
+                    Parent = Base,
+                })
+            elseif not Button.Disabled then
+                -- Add subtle gradient for regular buttons
+                local Gradient = New("UIGradient", {
+                    Color = ColorSequence.new{
+                        ColorSequenceKeypoint.new(0, Library.Scheme.MainColor),
+                        ColorSequenceKeypoint.new(1, Library.Scheme.SecondaryColor)
+                    },
+                    Rotation = 90,
                     Parent = Base,
                 })
             end
@@ -2862,6 +2906,16 @@ do
                     TextTransparency = 0,
                 })
                 Button.Tween:Play()
+                
+                -- Enhanced glow effect on hover
+                local GlowFrame = Button.Base:GetAttribute("GlowFrame")
+                if GlowFrame then
+                    GlowFrame.Visible = true
+                    TweenService:Create(GlowFrame, Library.TweenInfo, {
+                        BackgroundTransparency = 0.7,
+                        Size = UDim2.fromOffset(Button.Base.AbsoluteSize.X + 12, Button.Base.AbsoluteSize.Y + 12),
+                    }):Play()
+                end
             end)
             Button.Base.MouseLeave:Connect(function()
                 if Button.Disabled then
@@ -2872,6 +2926,20 @@ do
                     TextTransparency = 0.4,
                 })
                 Button.Tween:Play()
+                
+                -- Fade out glow effect
+                local GlowFrame = Button.Base:GetAttribute("GlowFrame")
+                if GlowFrame then
+                    TweenService:Create(GlowFrame, Library.TweenInfo, {
+                        BackgroundTransparency = 0.9,
+                        Size = UDim2.fromOffset(Button.Base.AbsoluteSize.X + 8, Button.Base.AbsoluteSize.Y + 8),
+                    }):Play()
+                    
+                    task.wait(Library.TweenInfo.Time)
+                    if GlowFrame then
+                        GlowFrame.Visible = false
+                    end
+                end
             end)
 
             Button.Base.MouseButton1Click:Connect(function()
