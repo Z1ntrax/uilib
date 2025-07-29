@@ -2866,8 +2866,8 @@ do
                     Parent = Glow,
                 })
                 
-                -- Store glow reference for hover effects
-                Base:SetAttribute("GlowFrame", Glow)
+                -- Store glow reference for hover effects (not as attribute)
+                Base.GlowFrame = Glow
             end
 
             -- Add enhanced gradient effect for risky buttons
@@ -2908,7 +2908,7 @@ do
                 Button.Tween:Play()
                 
                 -- Enhanced glow effect on hover
-                local GlowFrame = Button.Base:GetAttribute("GlowFrame")
+                local GlowFrame = Button.Base.GlowFrame
                 if GlowFrame then
                     GlowFrame.Visible = true
                     TweenService:Create(GlowFrame, Library.TweenInfo, {
@@ -2928,17 +2928,19 @@ do
                 Button.Tween:Play()
                 
                 -- Fade out glow effect
-                local GlowFrame = Button.Base:GetAttribute("GlowFrame")
+                local GlowFrame = Button.Base.GlowFrame
                 if GlowFrame then
                     TweenService:Create(GlowFrame, Library.TweenInfo, {
                         BackgroundTransparency = 0.9,
                         Size = UDim2.fromOffset(Button.Base.AbsoluteSize.X + 8, Button.Base.AbsoluteSize.Y + 8),
                     }):Play()
                     
-                    task.wait(Library.TweenInfo.Time)
-                    if GlowFrame then
-                        GlowFrame.Visible = false
-                    end
+                    task.spawn(function()
+                        task.wait(Library.TweenInfo.Time)
+                        if GlowFrame then
+                            GlowFrame.Visible = false
+                        end
+                    end)
                 end
             end)
 
