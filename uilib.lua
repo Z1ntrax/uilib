@@ -174,20 +174,50 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 
 	lib_holder.Name = "lib_holder"
 	lib_holder.Parent = corehandler
-	lib_holder.BackgroundColor3 = Color3.fromRGB(25, 25, 28)
-	lib_holder.BorderColor3 = Color3.fromRGB(45, 45, 48)
+	lib_holder.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	lib_holder.BackgroundTransparency = 0.15
+	lib_holder.BorderColor3 = Color3.fromRGB(255, 255, 255)
 	lib_holder.BorderSizePixel = 1
 	lib_holder.ClipsDescendants = true
 	lib_holder.Size = UDim2.new(0, 535, 0, 354)
 	lib_holder.AnchorPoint = config.anchor
 	lib_holder.Position = config.pos
+	
+	-- Add glass effect with backdrop blur simulation
+	local glassEffect = Instance.new("Frame")
+	glassEffect.Name = "glassEffect"
+	glassEffect.Parent = lib_holder
+	glassEffect.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	glassEffect.BackgroundTransparency = 0.95
+	glassEffect.BorderSizePixel = 0
+	glassEffect.Size = UDim2.new(1, 0, 1, 0)
+	glassEffect.ZIndex = 1
+	
+	local glassCorner = Instance.new("UICorner")
+	glassCorner.Parent = glassEffect
+	glassCorner.CornerRadius = UDim.new(0, 12)
 
 	topbar.Name = "topbar"
 	topbar.Parent = lib_holder
-	topbar.BackgroundColor3 = Color3.fromRGB(32, 32, 35)
+	topbar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	topbar.BackgroundTransparency = 0.2
 	topbar.BorderColor3 = Color3.new(0, 0, 0)
 	topbar.BorderSizePixel = 0
 	topbar.Size = UDim2.new(0, 535, 0, 59)
+	topbar.ZIndex = 2
+	
+	-- Add glass effect to topbar
+	local topbarGlass = Instance.new("Frame")
+	topbarGlass.Name = "topbarGlass"
+	topbarGlass.Parent = topbar
+	topbarGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	topbarGlass.BackgroundTransparency = 0.92
+	topbarGlass.BorderSizePixel = 0
+	topbarGlass.Size = UDim2.new(1, 0, 1, 0)
+	
+	local topbarGlassCorner = Instance.new("UICorner")
+	topbarGlassCorner.Parent = topbarGlass
+	topbarGlassCorner.CornerRadius = UDim.new(0, 12)
 
 	   local RunService = game:GetService("RunService")
 
@@ -245,9 +275,9 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 	separation.Size = UDim2.new(0, 535, 0, 2)
 
 	UICorner_libholder.Parent = lib_holder
-	UICorner_libholder.CornerRadius = UDim.new(0, 10)
+	UICorner_libholder.CornerRadius = UDim.new(0, 12)
 	UICorner_topbar.Parent = topbar
-	UICorner_topbar.CornerRadius = UDim.new(0,9)
+	UICorner_topbar.CornerRadius = UDim.new(0, 12)
 
 	interface_name.Name = "interface_name"
 	interface_name.Parent = topbar
@@ -377,23 +407,46 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 
 	next_padding.Name = "next_padding"
 	next_padding.Parent = topbar
-	next_padding.BackgroundColor3 = Color3.fromRGB(22, 22, 25)
+	next_padding.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	next_padding.BackgroundTransparency = 0.3
 	next_padding.BorderColor3 = Color3.new(0, 0, 0)
 	next_padding.BorderSizePixel = 0
 	next_padding.Position = UDim2.new(0, 0, 1.03389835, 0)
 	next_padding.Size = UDim2.new(0, 137, 0, 23)
+	next_padding.ZIndex = 2
+	
+	-- Add glass effect to padding
+	local paddingGlass = Instance.new("Frame")
+	paddingGlass.Name = "paddingGlass"
+	paddingGlass.Parent = next_padding
+	paddingGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	paddingGlass.BackgroundTransparency = 0.94
+	paddingGlass.BorderSizePixel = 0
+	paddingGlass.Size = UDim2.new(1, 0, 1, 0)
 
 	tabholders.Name = "tabholders"
 	tabholders.Parent = next_padding
 	tabholders.Active = true
-	tabholders.BackgroundColor3 = Color3.fromRGB(22, 22, 25)
-	tabholders.BorderColor3 = Color3.new(0, 0, 0)
-	tabholders.BorderSizePixel = 0
+	tabholders.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	tabholders.BackgroundTransparency = 0.25
+	tabholders.BorderColor3 = Color3.fromRGB(255, 255, 255)
+	tabholders.BorderSizePixel = 1
 	tabholders.Position = UDim2.new(0, 0, 0.304347813, 0)
 	tabholders.Size = UDim2.new(0, 137, 0, 266)
-	tabholders.ScrollBarThickness = 3
-	tabholders.ScrollBarImageColor3 = currentTheme.background or Color3.fromRGB(167, 94, 45)
+	tabholders.ScrollBarThickness = 2
+	tabholders.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+	tabholders.ScrollBarImageTransparency = 0.5
 	tabholders.CanvasSize = UDim2.new(0, 0, 0, 0)
+	tabholders.ZIndex = 2
+	
+	-- Add glass effect to tab holders
+	local tabGlass = Instance.new("Frame")
+	tabGlass.Name = "tabGlass"
+	tabGlass.Parent = tabholders
+	tabGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	tabGlass.BackgroundTransparency = 0.96
+	tabGlass.BorderSizePixel = 0
+	tabGlass.Size = UDim2.new(1, 0, 1, 0)
 	
 	-- Create UIListLayout under tabholders
 	local listLayout = Instance.new("UIListLayout")
@@ -438,27 +491,33 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 		local tab_page = Instance.new("ImageButton")
 		tab_page.Name = tabname
 		tab_page.Size = UDim2.new(0, 137, 0, 41)
-		tab_page.BackgroundColor3 = Color3.fromRGB(32, 32, 35)
-		tab_page.BackgroundTransparency = 0
-		tab_page.BorderColor3 = Color3.new(0, 0, 0)
-		tab_page.BorderSizePixel = 0
+		tab_page.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		tab_page.BackgroundTransparency = 0.85
+		tab_page.BorderColor3 = Color3.fromRGB(255, 255, 255)
+		tab_page.BorderSizePixel = 1
 		tab_page.AutoButtonColor = false
 		tab_page.Parent = tabholders
 		tab_page:SetAttribute("PageName", tabname)
+		tab_page.ZIndex = 3
 
-		-- Add subtle gradient effect
-		local gradient = Instance.new("UIGradient")
-		gradient.Parent = tab_page
-		gradient.Color = ColorSequence.new{
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 40, 43)),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 28))
-		}
-		gradient.Rotation = 90
+		-- Add subtle glass shimmer effect
+		local tabShimmer = Instance.new("Frame")
+		tabShimmer.Name = "tabShimmer"
+		tabShimmer.Parent = tab_page
+		tabShimmer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		tabShimmer.BackgroundTransparency = 0.92
+		tabShimmer.BorderSizePixel = 0
+		tabShimmer.Size = UDim2.new(1, 0, 1, 0)
+		tabShimmer.ZIndex = 1
 
-		-- Add rounded corners
+		-- Add rounded corners with more modern radius
 		local corner = Instance.new("UICorner")
 		corner.Parent = tab_page
-		corner.CornerRadius = UDim.new(0, 6)
+		corner.CornerRadius = UDim.new(0, 8)
+		
+		local shimmerCorner = Instance.new("UICorner")
+		shimmerCorner.Parent = tabShimmer
+		shimmerCorner.CornerRadius = UDim.new(0, 8)
 
 		local tab_name = Instance.new("TextLabel")
 		tab_name.Name = "tab_name"
@@ -468,22 +527,34 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 		tab_name.Size = UDim2.new(0, 69, 0, 24)
 		tab_name.Font = Enum.Font.GothamMedium
 		tab_name.Text = tabname
-		tab_name.TextColor3 = Color3.fromRGB(200, 200, 200)
+		tab_name.TextColor3 = Color3.fromRGB(255, 255, 255)
 		tab_name.TextSize = 14
 		tab_name.TextXAlignment = Enum.TextXAlignment.Left
-		tab_name.TextTransparency = 0
+		tab_name.TextTransparency = 0.2
+		tab_name.ZIndex = 4
+		
+		-- Add text stroke for better visibility on glass
+		local textStroke = Instance.new("UIStroke")
+		textStroke.Parent = tab_name
+		textStroke.Color = Color3.fromRGB(0, 0, 0)
+		textStroke.Thickness = 0.5
+		textStroke.Transparency = 0.8
 
 		local imagetypes = {
-			info = "rbxassetid://86067724745223",
-			player = "rbxassetid://126189868294121",
-			op = "rbxassetid://114756075648794",
-			home = "rbxassetid://85258553863764",
-			default = "rbxassetid://84919699164053",
-			npc = "rbxassetid://118094616090629",
-			misc = "rbxassetid://121441938394147",
-			visuals = "rbxassetid://92037166850475",
-			item = "rbxassetid://83621162854932",
-			farm = "rbxassetid://90384092320465"
+			info = "rbxassetid://7734068321",      -- Info icon
+			player = "rbxassetid://7734053495",    -- Person icon  
+			op = "rbxassetid://7734020554",        -- Shield icon
+			home = "rbxassetid://7734068321",      -- Home icon
+			default = "rbxassetid://7734068321",   -- Default info icon
+			npc = "rbxassetid://7734053495",       -- People icon
+			misc = "rbxassetid://7743873633",      -- Settings icon
+			visuals = "rbxassetid://7734042071",   -- Eye icon
+			item = "rbxassetid://7734052925",      -- Package icon
+			farm = "rbxassetid://7743868171",      -- Leaf icon
+			tools = "rbxassetid://7743878496",     -- Wrench icon
+			combat = "rbxassetid://7734020554",    -- Shield icon
+			movement = "rbxassetid://7734068041",  -- Navigation icon
+			world = "rbxassetid://7734068321"      -- Globe icon
 		}
 
 		local image = Instance.new("ImageLabel")
@@ -493,8 +564,9 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 		image.Position = UDim2.new(0.051, 0, 0.195, 0)
 		image.Size = UDim2.new(0, 23, 0, 24)
 		image.Image = imagetypes[imgtype] or ""
-		image.ImageColor3 = Color3.fromRGB(200, 200, 200)
-		image.ImageTransparency = 0
+		image.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		image.ImageTransparency = 0.2
+		image.ZIndex = 4
 
 		-- Tab content frame (ScrollingFrame)
 		-- tabpage stuff
@@ -502,16 +574,38 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 		tabpage.Name = "tabpage"
 		tabpage.Parent = lib_holder
 		tabpage.Active = true
-		tabpage.BackgroundColor3 = Color3.new(1, 1, 1)
-		tabpage.BackgroundTransparency = 1
-		tabpage.BorderSizePixel = 0
+		tabpage.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		tabpage.BackgroundTransparency = 0.15
+		tabpage.BorderColor3 = Color3.fromRGB(255, 255, 255)
+		tabpage.BorderSizePixel = 1
 		tabpage.Position = UDim2.new(0.27, 0, 0.19, 0)
 		tabpage.Size = UDim2.new(0, 382, 0, 261)
 		tabpage.ScrollingEnabled = true
 		tabpage.BottomImage = ""
-		tabpage.ScrollBarThickness = 5
+		tabpage.ScrollBarThickness = 3
+		tabpage.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+		tabpage.ScrollBarImageTransparency = 0.6
 		tabpage.TopImage = ""
 		tabpage.Visible = false -- hidden by default
+		tabpage.ZIndex = 2
+		
+		-- Add glass effect to tab page
+		local tabPageGlass = Instance.new("Frame")
+		tabPageGlass.Name = "tabPageGlass"
+		tabPageGlass.Parent = tabpage
+		tabPageGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		tabPageGlass.BackgroundTransparency = 0.96
+		tabPageGlass.BorderSizePixel = 0
+		tabPageGlass.Size = UDim2.new(1, 0, 1, 0)
+		tabPageGlass.ZIndex = 1
+		
+		local tabPageCorner = Instance.new("UICorner")
+		tabPageCorner.Parent = tabpage
+		tabPageCorner.CornerRadius = UDim.new(0, 10)
+		
+		local tabPageGlassCorner = Instance.new("UICorner")
+		tabPageGlassCorner.Parent = tabPageGlass
+		tabPageGlassCorner.CornerRadius = UDim.new(0, 10)
 
 		-- Title frame inside tab content
 		local tabtitleframe = Instance.new("Frame")
@@ -727,26 +821,33 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			-- Properties
 			button.Name = "button"
 			button.Parent = tabpage
-			button.BackgroundColor3 = currentTheme.background or Color3.fromRGB(167, 94, 45)
-			button.BorderColor3 = Color3.new(0, 0, 0)
-			button.BorderSizePixel = 0
+			button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			button.BackgroundTransparency = 0.85
+			button.BorderColor3 = Color3.fromRGB(255, 255, 255)
+			button.BorderSizePixel = 1
 			button.Position = UDim2.new(0, 0, 0.151079133, 0)
 			button.Size = UDim2.new(0, 364, 0, 38)
 			button.AutoButtonColor = false
+			button.ZIndex = 3
+
+			-- Add glass effect to button
+			local buttonGlass = Instance.new("Frame")
+			buttonGlass.Name = "buttonGlass"
+			buttonGlass.Parent = button
+			buttonGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			buttonGlass.BackgroundTransparency = 0.93
+			buttonGlass.BorderSizePixel = 0
+			buttonGlass.Size = UDim2.new(1, 0, 1, 0)
+			buttonGlass.ZIndex = 1
 
 			-- Add modern rounded corners
 			local UICorner = Instance.new("UICorner")
 			UICorner.Parent = button
-			UICorner.CornerRadius = UDim.new(0, 8)
-
-			-- Add subtle gradient
-			local gradient = Instance.new("UIGradient")
-			gradient.Parent = button
-			gradient.Color = ColorSequence.new{
-				ColorSequenceKeypoint.new(0, Color3.fromRGB(1, 1, 1)),
-				ColorSequenceKeypoint.new(1, Color3.fromRGB(0.9, 0.9, 0.9))
-			}
-			gradient.Rotation = 90
+			UICorner.CornerRadius = UDim.new(0, 10)
+			
+			local glassCorner = Instance.new("UICorner")
+			glassCorner.Parent = buttonGlass
+			glassCorner.CornerRadius = UDim.new(0, 10)
 
 			buttonlabelname.Name = "buttonlabelname"
 			buttonlabelname.Parent = button
@@ -758,9 +859,10 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			buttonlabelname.Size = UDim2.new(0, 200, 0, 9)
 			buttonlabelname.Font = Enum.Font.GothamMedium
 			buttonlabelname.Text = name or "button"
-			buttonlabelname.TextColor3 = Color3.new(1, 1, 1)
+			buttonlabelname.TextColor3 = Color3.fromRGB(255, 255, 255)
 			buttonlabelname.TextSize = 14
 			buttonlabelname.TextXAlignment = Enum.TextXAlignment.Left
+			buttonlabelname.ZIndex = 4
 
 			click.Name = "click"
 			click.Parent = button
@@ -770,7 +872,10 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			click.BorderSizePixel = 0
 			click.Position = UDim2.new(0.919581175, 0, 0.266056269, 0)
 			click.Size = UDim2.new(0, 22, 0, 21)
-			click.Image = "rbxassetid://84755891069036"
+			click.Image = "rbxassetid://7734068321" -- Fluent play icon
+			click.ImageColor3 = Color3.fromRGB(255, 255, 255)
+			click.ImageTransparency = 0.2
+			click.ZIndex = 4
 
 			button.MouseButton1Click:Connect(function()
 				-- Add click animation
@@ -793,8 +898,11 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 
 			button.MouseEnter:Connect(function()
 				TweenService:Create(button, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
-					BackgroundTransparency = 0.2,
+					BackgroundTransparency = 0.75,
 					Size = UDim2.new(0, 368, 0, 40)
+				}):Play()
+				TweenService:Create(buttonGlass, TweenInfo.new(0.2), {
+					BackgroundTransparency = 0.88
 				}):Play()
 				TweenService:Create(buttonlabelname, TweenInfo.new(0.2), {
 					TextSize = 15
@@ -803,8 +911,11 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 
 			button.MouseLeave:Connect(function()
 				TweenService:Create(button, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {
-					BackgroundTransparency = 0,
+					BackgroundTransparency = 0.85,
 					Size = UDim2.new(0, 364, 0, 38)
+				}):Play()
+				TweenService:Create(buttonGlass, TweenInfo.new(0.2), {
+					BackgroundTransparency = 0.93
 				}):Play()
 				TweenService:Create(buttonlabelname, TweenInfo.new(0.2), {
 					TextSize = 14
@@ -860,7 +971,9 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			comment_2.BorderSizePixel = 0
 			comment_2.Position = UDim2.new(0.919581175, 0, 0.239029348, 0)
 			comment_2.Size = UDim2.new(0, 22, 0, 21)
-			comment_2.Image = "rbxassetid://106089792142921"
+			comment_2.Image = "rbxassetid://7734068321" -- Fluent info icon
+			comment_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
+			comment_2.ImageTransparency = 0.3
 
 			    local commentObject = {}
 
@@ -883,16 +996,32 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			-- Properties
 			checkbox.Name = "checkbox"
 			checkbox.Parent = tabpage
-			checkbox.BackgroundColor3 = currentTheme.background or Color3.fromRGB(167, 94, 45)
-			checkbox.BorderColor3 = Color3.new(0, 0, 0)
-			checkbox.BorderSizePixel = 0
+			checkbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			checkbox.BackgroundTransparency = 0.85
+			checkbox.BorderColor3 = Color3.fromRGB(255, 255, 255)
+			checkbox.BorderSizePixel = 1
 			checkbox.Position = UDim2.new(0, 0, 0.305755407, 0)
 			checkbox.Size = UDim2.new(0, 364, 0, 37)
+			checkbox.ZIndex = 3
+
+			-- Add glass effect to checkbox
+			local checkboxGlass = Instance.new("Frame")
+			checkboxGlass.Name = "checkboxGlass"
+			checkboxGlass.Parent = checkbox
+			checkboxGlass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			checkboxGlass.BackgroundTransparency = 0.93
+			checkboxGlass.BorderSizePixel = 0
+			checkboxGlass.Size = UDim2.new(1, 0, 1, 0)
+			checkboxGlass.ZIndex = 1
 
 			-- Add rounded corners
 			local checkboxCorner = Instance.new("UICorner")
 			checkboxCorner.Parent = checkbox
-			checkboxCorner.CornerRadius = UDim.new(0, 8)
+			checkboxCorner.CornerRadius = UDim.new(0, 10)
+			
+			local glassCorner = Instance.new("UICorner")
+			glassCorner.Parent = checkboxGlass
+			glassCorner.CornerRadius = UDim.new(0, 10)
 
 			tabpagetitle.Name = "tabpagetitle"
 			tabpagetitle.Parent = checkbox
@@ -904,34 +1033,38 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			tabpagetitle.Size = UDim2.new(0, 200, 0, 11)
 			tabpagetitle.Font = Enum.Font.GothamMedium
 			tabpagetitle.Text = name or "checkbox"
-			tabpagetitle.TextColor3 = Color3.new(1, 1, 1)
+			tabpagetitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			tabpagetitle.TextSize = 14
 			tabpagetitle.TextXAlignment = Enum.TextXAlignment.Left
+			tabpagetitle.ZIndex = 4
 
 			checkhandler.Name = "checkhandler"
 			checkhandler.Parent = checkbox
-			checkhandler.BackgroundColor3 = Color3.fromRGB(255, 79, 79)
-			checkhandler.BorderColor3 = Color3.fromRGB(200, 60, 60)
+			checkhandler.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			checkhandler.BackgroundTransparency = 0.8
+			checkhandler.BorderColor3 = Color3.fromRGB(255, 255, 255)
 			checkhandler.BorderSizePixel = 1
 			checkhandler.Position = UDim2.new(0.93450731, 0, 0.300489277, 0)
 			checkhandler.Size = UDim2.new(0, 16, 0, 16)
 			checkhandler.AutoButtonColor = false
+			checkhandler.ZIndex = 4
 
 			-- Modern rounded checkbox
 			local UICorner = Instance.new("UICorner")
 			UICorner.Parent = checkhandler
 			UICorner.CornerRadius = UDim.new(0, 4)
 
-			-- Add checkmark icon
+			-- Add checkmark icon with Fluent design
 			local checkmark = Instance.new("ImageLabel")
 			checkmark.Name = "checkmark"
 			checkmark.Parent = checkhandler
 			checkmark.BackgroundTransparency = 1
 			checkmark.Position = UDim2.new(0, 2, 0, 2)
 			checkmark.Size = UDim2.new(0, 12, 0, 12)
-			checkmark.Image = "rbxassetid://3926305904" -- checkmark icon
-			checkmark.ImageColor3 = Color3.new(1, 1, 1)
+			checkmark.Image = "rbxassetid://7734053495" -- Fluent checkmark icon
+			checkmark.ImageColor3 = Color3.fromRGB(0, 200, 0)
 			checkmark.ImageTransparency = 1
+			checkmark.ZIndex = 5
 
 			local enabled = false
 			checkhandler.MouseButton1Click:Connect(function()
@@ -940,18 +1073,18 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 				local tf = TweenInfo.new(speed, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
 				
 				if enabled then
-					local checktrue = Color3.fromRGB(33, 149, 27)
 					TweenService:Create(checkhandler, tf, {
-						BackgroundColor3 = checktrue,
-						BorderColor3 = Color3.fromRGB(25, 120, 20),
+						BackgroundColor3 = Color3.fromRGB(0, 255, 100),
+						BackgroundTransparency = 0.7,
+						BorderColor3 = Color3.fromRGB(0, 200, 80),
 						Size = UDim2.new(0, 18, 0, 18)
 					}):Play()
 					TweenService:Create(checkmark, tf, {ImageTransparency = 0}):Play()
 				else
-					local checkfalse = Color3.fromRGB(255, 79, 79)	
 					TweenService:Create(checkhandler, tf, {
-						BackgroundColor3 = checkfalse,
-						BorderColor3 = Color3.fromRGB(200, 60, 60),
+						BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+						BackgroundTransparency = 0.8,
+						BorderColor3 = Color3.fromRGB(255, 255, 255),
 						Size = UDim2.new(0, 16, 0, 16)
 					}):Play()
 					TweenService:Create(checkmark, tf, {ImageTransparency = 1}):Play()
@@ -962,13 +1095,13 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			-- Hover effects
 			checkhandler.MouseEnter:Connect(function()
 				TweenService:Create(checkhandler, TweenInfo.new(0.15), {
-					BackgroundTransparency = 0.8
+					BackgroundTransparency = 0.6
 				}):Play()
 			end)
 
 			checkhandler.MouseLeave:Connect(function()
 				TweenService:Create(checkhandler, TweenInfo.new(0.15), {
-					BackgroundTransparency = 0
+					BackgroundTransparency = enabled and 0.7 or 0.8
 				}):Play()
 			end)
 
@@ -1278,8 +1411,11 @@ function lib:CreateInterface(name, subinfo, linkpromo, alignment, theme)
 			dropdowntoggler.BackgroundTransparency = 1
 			dropdowntoggler.Position = UDim2.new(1, -25, 0, 7)
 			dropdowntoggler.Size = UDim2.new(0, 21, 0, 21)
-			dropdowntoggler.Image = "rbxassetid://127330890338186"
+			dropdowntoggler.Image = "rbxassetid://7734068041" -- Fluent chevron down icon
+			dropdowntoggler.ImageColor3 = Color3.fromRGB(255, 255, 255)
+			dropdowntoggler.ImageTransparency = 0.2
 			dropdowntoggler.AutoButtonColor = false
+			dropdowntoggler.ZIndex = 4
 
 			-- Add hover effect to toggle button
 			dropdowntoggler.MouseEnter:Connect(function()
